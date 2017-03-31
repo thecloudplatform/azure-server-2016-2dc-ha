@@ -26,7 +26,7 @@
       "metadata": {
         "description": "The name of the Virtual Network to Create"
       },
-      "defaultValue": "adVNET"
+      "defaultValue": "VNETDemo"
     },
     "virtualNetworkAddressRange": {
       "type": "string",
@@ -40,7 +40,7 @@
       "metadata": {
         "description": "The name of the subnet created in the new VNET"
       },
-      "defaultValue": "adSubnet"
+      "defaultValue": "SubnetDemo"
     },
     "adSubnet": {
       "type": "string",
@@ -54,35 +54,35 @@
       "metadata": {
         "description": "The name of the NIC attached to the new PDC"
       },
-      "defaultValue": "adPDCNic"
+      "defaultValue": "DC1Nic"
     },
     "adPDCNicIPAddress": {
       "type": "string",
       "metadata": {
         "description": "The IP address of the new AD PDC"
       },
-      "defaultValue": "10.0.0.4"
+      "defaultValue": "10.0.0.11"
     },
     "adBDCNicName": {
       "type": "string",
       "metadata": {
         "description": "The name of the NIC attached to the new BDC"
       },
-      "defaultValue": "adBDCNic"
+      "defaultValue": "DC2Nic"
     },
     "adBDCNicIPAddress": {
       "type": "string",
       "metadata": {
         "description": "The IP address of the new AD BDC"
       },
-      "defaultValue": "10.0.0.5"
+      "defaultValue": "10.0.0.12"
     },
     "publicIPAddressName": {
       "type": "string",
       "metadata": {
         "description": "The name of the public IP address used by the Load Balancer"
       },
-      "defaultValue": "adpublicIP"
+      "defaultValue": "DCPublicIP"
     },
     "publicIPAddressType": {
       "type": "string",
@@ -100,21 +100,21 @@
       "metadata": {
         "description": "The computer name of the PDC"
       },
-      "defaultValue": "adPDC"
+      "defaultValue": "DC1"
     },
     "adBDCVMName": {
       "type": "string",
       "metadata": {
         "description": "The computer name of the BDC"
       },
-      "defaultValue": "adBDC"
+      "defaultValue": "DC2"
     },
     "adminUsername": {
       "type": "string",
       "metadata": {
         "description": "The name of the Administrator of the new VM and Domain"
       },
-      "defaultValue": "adAdministrator"
+      "defaultValue": "DemoAdmin"
     },
     "adminPassword": {
       "type": "securestring",
@@ -189,33 +189,35 @@
       "metadata": {
         "description": "The name of the availability set that the AD VM is created in"
       },
-      "defaultValue": "adAvailabiltySet"
+      "defaultValue": "DCAvailabilitySet"
     },
     "domainName": {
       "type": "string",
       "metadata": {
         "description": "The FQDN of the AD Domain created "
-      }
+      },
+      "defaultValue": "internal.thedemoplatform.co.uk"
     },
     "dnsPrefix": {
       "type": "string",
       "metadata": {
         "description": "The DNS prefix for the public IP address used by the Load Balancer"
-      }
+      },
+      "defaultValue": "dc-thedemoplatform"
     },
     "pdcRDPPort": {
       "type": "int",
       "metadata": {
         "description": "The public RDP port for the PDC VM"
       },
-      "defaultValue": 3389
+      "defaultValue": 33891
     },
     "bdcRDPPort": {
       "type": "int",
       "metadata": {
         "description": "The public RDP port for the BDC VM"
       },
-      "defaultValue": 13389
+      "defaultValue": 33892
     },
     "assetLocation": {
       "type": "string",
@@ -226,10 +228,10 @@
     }
   },
   "variables": {
-    "adLBFE": "LBFE",
-    "adLBBE": "LBBE",
-    "adPDCRDPNAT": "adPDCRDP",
-    "adBDCRDPNAT": "adBDCRDP",
+    "adLBFE": "DCLBFE",
+    "adLBBE": "DCLBBE",
+    "adPDCRDPNAT": "DC1RDP",
+    "adBDCRDPNAT": "DC2RDP",
     "VnetID": "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
     "adSubnetRef": "[concat(variables('VnetID'),'/subnets/',parameters('adSubnetName'))]",
     "adPDCNicId": "[resourceId('Microsoft.Network/networkInterfaces',parameters('adPDCNicName'))]",
@@ -242,8 +244,8 @@
     "adPDCRDPNATRuleID": "[concat(variables('adlbID'),'/inboundNatRules/',variables('adPDCRDPNAT'))]",
     "adBDCRDPNATRuleID": "[concat(variables('adlbID'),'/inboundNatRules/',variables('adBDCRDPNAT'))]",
     "adBEAddressPoolID": "[concat(variables('adlbID'),'/backendAddressPools/',variables('adLBBE'))]",
-    "adPDCDataDisk": "ADPDCDataDisk",
-    "adBDCDataDisk": "ADBDCDataDisk",
+    "adPDCDataDisk": "DC1Data",
+    "adBDCDataDisk": "DC2Data",
     "adDataDiskSize": 1000,
     "vnetTemplateUri": "[concat(parameters('assetLocation'),'/nestedtemplates/vnet.json')]",
     "nicTemplateUri": "[concat(parameters('assetLocation'),'/nestedtemplates/nic.json')]",
