@@ -6,7 +6,7 @@
       "value": "GEN-UNIQUE"
     },
     "adminUsername": {
-      "value": "azureuser"
+      "value": "DemoAdmin"
     },
     "adminPassword": {
       "value": "GEN-PASSWORD"
@@ -18,10 +18,10 @@
       "value": "GEN-UNIQUE"
     },
     "publicIPAddressName": {
-      "value": "myPubIp"
+      "value": "internalip"
     },
     "domainName": {
-      "value": "mydomain.local"
+      "value": "internal.domain.co.uk"
     }
   }
 }
