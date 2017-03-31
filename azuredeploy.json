@@ -238,7 +238,7 @@
     "adPDCIPConfigID": "[concat(variables('adPDCNicId'),'/ipConfigurations/ipconfig1')]",
     "adBDCNicId": "[resourceId('Microsoft.Network/networkInterfaces',parameters('adBDCNicName'))]",
     "adBDCIPConfigID": "[concat(variables('adBDCNicId'),'/ipConfigurations/ipconfig1')]",
-    "adLBName": "adLoadBalancer",
+    "adLBName": "DCLoadBalancer",
     "adlbID": "[resourceId('Microsoft.Network/loadBalancers',variables('adLBName'))]",
     "adlbFEConfigID": "[concat(variables('adlbID'),'/frontendIPConfigurations/',variables('adLBFE'))]",
     "adPDCRDPNATRuleID": "[concat(variables('adlbID'),'/inboundNatRules/',variables('adPDCRDPNAT'))]",
